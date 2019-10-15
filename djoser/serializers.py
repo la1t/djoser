@@ -141,7 +141,7 @@ class UserFunctionsMixin:
         ):
             exc_code = 'email_not_found'
             raise ValidationError({
-                self.email_field: serializers.ErrorDetail(self.error_messages[exc_code], code=exc_code)
+                self.email_field: [serializers.ErrorDetail(self.error_messages[exc_code], code=exc_code)]
             })
 
 

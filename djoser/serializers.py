@@ -139,7 +139,10 @@ class UserFunctionsMixin:
                 settings.PASSWORD_RESET_SHOW_EMAIL_NOT_FOUND
                 or settings.USERNAME_RESET_SHOW_EMAIL_NOT_FOUND
         ):
-            self.fail("email_not_found")
+            exc_code = 'email_not_found'
+            raise ValidationError({
+                self.email_field: serializers.ErrorDetail(self.error_messages[exc_code], code=exc_code)
+            })
 
 
 class SendEmailResetSerializer(serializers.Serializer, UserFunctionsMixin):
